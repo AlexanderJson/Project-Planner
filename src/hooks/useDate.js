@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
-import moment from 'moment';
 
 function useDate(){
-    const [currentMonth, setCurrentMonth] = useState([]);
-    const [currentDay, setCurrentDay] = useState("");
+    const [days, setDays] = useState([]);
+    const [dateString, setDateString] = useState('');
+
     useEffect(() => {
-        const fetchDate = () => {
-            const daysInMonth = moment().daysInMonth();
-            const days = Array.from({length: daysInMonth}, (_, i) => moment().startOf('month').add(i, 'days').format('MMMM Do'));
-            setCurrentMonth(days);
-            const today = moment().format('MMMM Do');
-            setCurrentDay(today);
-        };
-        fetchDate();
+        const date = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDateString = date.toLocaleDateString('en-US', options);
+
+        const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        const daysArray = [...Array(daysInMonth).keys()].map((day) => day + 1);
+    
+        setDays(daysArray);
+        setDateString(formattedDateString);
     }, []);
-    return [currentMonth, currentDay];
 
-
+    return { days, dateString };
 
 };
 

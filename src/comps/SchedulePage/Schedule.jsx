@@ -1,31 +1,30 @@
-import React from 'react';
-import useDate from '../../hooks/useDate';
+import React, { Suspense, lazy, useState } from 'react';
 import './SchedulePage.css';
+const LazyCalendar = lazy(() => import('./Calendar'));
+const LazyEventDetails = lazy(() => import('./EventDetails'));
+
 function Schedule() {
     
-    const currentMonth = useDate();
-    const {currentDay} = useDate();
-
+ 
 
     return (
-    <div>
-        <div className="plans-header">
-        <h1>{currentDay}</h1>
+
+        <div className="bookings-div">
+             <br>
+             </br>
+             <Suspense fallback={<div>Loading...</div>}>
+            <LazyCalendar/>
+            <div className="vertical-line"></div>
+            <LazyEventDetails/>
+            </Suspense>
+            <br>
+            </br>
         </div>
-        <div className="schedule-div">
-            {currentMonth.map((date, index) =>(
-            <div key={index} className="day-div">{date}</div>
-        ))}
-        </div>
-        </div>
-    );
-}
+
+)};
 
 
 export default Schedule;
 
 
-/** <h1>Schedule</h1>
-            <Suspense fallback={<div>Loading...</div>}>
-            <LazyDate />
-            </Suspense> */
+

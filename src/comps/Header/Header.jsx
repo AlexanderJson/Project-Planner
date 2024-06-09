@@ -17,6 +17,7 @@ const Header = () => {
             {menuOpen && (
             <div className="link-div">
             <ul>
+            <li><Link to='/'><div class="icon-div"><i class="fa fa-home icon"></i></div></Link></li>
             <li><Link to='/github'><div class="icon-div"><i class="fab fa-github icon"></i></div></Link></li>
             <li><Link to='/schedule'><div class="icon-div"><i class="far fa-calendar-alt icon"></i></div></Link></li>
             <li><Link to='/brainstorm'><div class="icon-div"><i class="fas fa-lightbulb icon"></i></div></Link></li>
