@@ -1,0 +1,37 @@
+.schedule-div{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+  
+}
+
+.day-div {
+    background-color: #ffffff;
+    color: black;
+    font-size: 40px;
+    position: relative;
+    margin: 10px;
+    text-align: left;
+    border-radius: 5px; 
+    transition: all 0.3s ease; 
+}
+
+.day-div:hover {
+    background-color: #f0f0f0;
+    cursor: pointer; 
+    transform: scale(1.02); 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+}
+
+.day-div:active {
+    background-color: #11d646; /* Darker gray background when active */
+    transform: scale(1.28); /* Slightly decrease size when active */
+
+}
+
+.day-div:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Add a subtle focus ring */
+}
+
