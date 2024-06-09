@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 function useDate(){
     const [days, setDays] = useState([]);
     const [dateString, setDateString] = useState('');
+    const [month, setMonth] = useState(0);
 
     useEffect(() => {
         const date = new Date();
@@ -14,9 +15,10 @@ function useDate(){
     
         setDays(daysArray);
         setDateString(formattedDateString);
+        setMonth(date.getMonth() + 1);
     }, []);
 
-    return { days, dateString };
+    return { days, dateString, month };
 
 };
 

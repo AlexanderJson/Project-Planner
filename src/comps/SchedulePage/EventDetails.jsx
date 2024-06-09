@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SchedulePage.css';
 
+
 function EventDetails() {
 
     const [selectedItem, setSelectedItem] = useState(null);

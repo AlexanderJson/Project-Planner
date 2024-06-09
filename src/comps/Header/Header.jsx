@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import useAuth from '../../hooks/useAuth';
+import HeaderIcon from './HeaderIcon';
 const Header = () => {
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const user = useAuth();
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -12,8 +15,16 @@ const Header = () => {
     return (
         <header id="header-div">
             <div class="icon-div">
-            <i class="fas fa-user icon" onClick={toggleMenu}></i>
+            {user && <img src={user.photoURL} alt="user" 
+            className="icon"
+            onError={(e) => {
+                e.target.src = <HeaderIcon/>;
+            }}
+            onClick={toggleMenu}
+            />}
             </div>
+
+            
             {menuOpen && (
             <div className="link-div">
             <ul>
@@ -27,6 +38,7 @@ const Header = () => {
             </ul>
             </div>
             )}
+            {user && <p>Welcome, {user.email}</p>}
         </header>
     );
 };

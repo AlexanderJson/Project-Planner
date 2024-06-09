@@ -1,9 +1,9 @@
 import React from 'react';
-
+import GithubSign from './GithubSign';
 const Login = () => {
     return (
         <div>
-            <h1>1</h1>
+            <GithubSign/>
        </div>
     );
 };
