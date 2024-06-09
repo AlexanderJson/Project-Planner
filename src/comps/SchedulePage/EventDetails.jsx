@@ -43,7 +43,6 @@ function EventDetails() {
             </details>
         </tr>
     ))}            
-    <button className='book-btn'>Book</button>
     </tbody>
             </table>
         </div>
