@@ -1,12 +1,14 @@
+// Fetches the logged in users data
+
+import {  onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../assets/firebaseConfig";
 
 const useAuth = () => {
 
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const auth = getAuth();
 
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {

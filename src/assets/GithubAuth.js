@@ -1,6 +1,6 @@
 import { GithubAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
-import { auth, firestore, timestamp } from './firebaseConfig';
+import { auth, db} from './firebaseConfig';
 
 const provider = new GithubAuthProvider();
 
@@ -11,14 +11,13 @@ export const GithubAuth = async () => {
         const user = result.user;
 
         if (user) {
-            await setDoc(doc(firestore, 'users', user.uid), {
+            await setDoc(doc(db, 'users', user.uid), {
                 user_id: user.uid,
                 name: user.displayName,
                 email: user.email,
                 avatar_url: user.photoURL,
-                created_at: timestamp,
                 providerId: user.providerData[0].providerId
-                
+
             },{ merge: true });
             return {
                 uid: user.uid,

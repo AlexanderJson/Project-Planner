@@ -1,7 +1,7 @@
+import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+import { getFirestore, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCKyzSITO3DWeBo_xyuJyGLcGxvNuXJGRo",
@@ -12,11 +12,15 @@ const firebaseConfig = {
     messagingSenderId: "304650147943",
     appId: "1:304650147943:web:30b1e0f6a97a0f520bdcc2",
     measurementId: "G-LL5031RSMN"
-  };
+};
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+// detta är databasen med alla collection, skapa dokumemtn, ändra domument osv. 
+const db = getFirestore(app);
+//detta är alla brhörigheter (hanterar alla inloggnings saker, som glömt lösenord osv)
+const auth = getAuth(app);
 
-export const auth = getAuth(app);
-export const firestore = getFirestore(app);
-export const timestamp = serverTimestamp();
+export { auth, db, serverTimestamp, analytics };
+
+
