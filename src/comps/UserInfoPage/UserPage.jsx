@@ -10,7 +10,7 @@ function UserPage() {
             {bookings.map((booking, index) =>(
                 <div key={index}>
                     <h3>Booked by</h3>
-                    <p>{booking.bookedBy}</p>
+                    <p>{booking.bookedByEmail}</p>
                     <h3>Date</h3>
                     <p>{booking.month} / {booking.date}</p>
                 </div>

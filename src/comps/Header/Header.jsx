@@ -38,7 +38,6 @@ const Header = () => {
             </ul>
             </div>
             )}
-            {user && <p>Welcome, {user.email}</p>}
         </header>
     );
 };

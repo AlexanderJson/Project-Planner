@@ -3,6 +3,7 @@ import useCurrentMonthDates  from '../../hooks/useDate';
 import { getFirestore, collection, query, where, getDocs,doc, setDoc } from 'firebase/firestore';
 import { auth, firestore } from '../../assets/firebaseConfig';
 import { GithubAuth } from '../../assets/GithubAuth';
+import useBookingData from '../../hooks/useBookingData';
 import './SchedulePage.css';
 function Calendar() {
     
@@ -12,24 +13,27 @@ function Calendar() {
 
     const [userInfo, setUserInfo] = useState(null);
 
+
     const getBookedDates = async () => {
-        const firestore = getFirestore();
-        try{
-            const bookingsRef = collection(firestore, 'bookings');
-
-            const q = query(bookingsRef, where('booked', '==', userInfo));
-
-            const querySnapshot = await getDocs(q);
-
-            const bookings = querySnapshot.docs.map((doc) => doc.data());
-            setBookedDates(bookings);
-            alert(bookings)
-        } catch (e){
-            console.log(e);
+        if(bookedDates === null) {
+            return;
+        } else {
+            alert(`Event booked: ${activeDate.day}/${activeDate.month}`);
+            const firestore = getFirestore();
+            const userInfo = await GithubAuth();
+            setUserInfo(userInfo);
+            const docRef = doc(firestore, 'bookings', `${activeDate.day}-${activeDate.month}` );
+            // fixa permissions så admins kan boka oflk, vanliga kan bar var tillgänliga
+            await setDoc(docRef, {
+                date: activeDate.day,
+                month: activeDate.month,
+                booked: true,
+                //attendees: [],
+                bookedBy: userInfo.name,
+                bookedByEmail: userInfo.email,
+            })
         }
-    };
-
-    
+    }
 
 
 

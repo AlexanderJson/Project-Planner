@@ -1,17 +1,20 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from '../assets/firebaseConfig';
+import useAuth from './useAuth';
 
 
 const useBookingData = () => {
-
-    const [bookings, setBookings] = useState(null);
+    const user = useAuth();
+    const [bookings, setBookings] = useState([]);
 
     useEffect(() => {
         const fetchBookingData = async () => {
+           
             try{
                 const bookingRef = collection(db, 'bookings');
-                const bookingSnapshot = await getDocs(bookingRef)
+                const q = query(bookingRef, where("bookedByEmail", "==", user.email));
+                const bookingSnapshot = await getDocs(q)
                 const bookingData = bookingSnapshot.docs.map(doc => doc.data());
                 setBookings(bookingData);
             }catch(e){
@@ -20,7 +23,8 @@ const useBookingData = () => {
       
         };
         fetchBookingData();
-    }, [db]);
+    }, [db, user]);
+
     return bookings;
 };
 

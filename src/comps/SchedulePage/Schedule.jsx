@@ -4,9 +4,7 @@ const LazyCalendar = lazy(() => import('./Calendar'));
 const LazyEventDetails = lazy(() => import('./EventDetails'));
 
 function Schedule() {
-    
- 
-
+  
     return (
 
         <div className="bookings-div">
